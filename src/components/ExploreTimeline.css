@@ -1,0 +1,105 @@
+.explore-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.explore-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.btn-back:hover {
+  color: var(--primary);
+}
+
+.explore-header h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Vertical line connecting cards */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  width: 2px;
+  background-color: var(--primary);
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.timeline-card {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  z-index: 1;
+  background-color: var(--bg-card);
+}
+
+.card-number {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 4px var(--bg-main);
+  margin-left: -8px; /* Align with the vertical line */
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.card-content p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.simple-list {
+  padding-left: 1.5rem;
+  color: var(--text-main);
+}
+
+.simple-list li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .timeline-container::before {
+    left: 20px;
+  }
+  .card-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}

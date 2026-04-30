@@ -1,0 +1,71 @@
+.scenario-simulator {
+  background-color: var(--bg-card);
+  border-left: 4px solid var(--secondary);
+  overflow: hidden;
+}
+
+.scenario-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  color: var(--text-main);
+}
+
+.scenario-header:hover {
+  background-color: var(--bg-subtle);
+}
+
+.scenario-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.scenario-title h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #fef08a; /* soft yellow */
+  color: #854d0e;
+  border-radius: 50%;
+}
+
+.scenario-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scenario-problem, .scenario-solution {
+  font-size: 0.95rem;
+}
+
+.scenario-problem strong {
+  display: block;
+  color: var(--error-text);
+  margin-bottom: 0.25rem;
+}
+
+.scenario-solution {
+  background-color: var(--bg-subtle);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+
+.scenario-solution strong {
+  display: block;
+  color: var(--accent-hover);
+  margin-bottom: 0.25rem;
+}

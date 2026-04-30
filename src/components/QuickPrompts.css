@@ -1,0 +1,32 @@
+.quick-prompts {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+}
+
+.quick-prompts-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.prompts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prompt-chip {
+  background-color: var(--bg-main);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.prompt-chip:hover {
+  background-color: var(--primary);
+  color: white;
+}
