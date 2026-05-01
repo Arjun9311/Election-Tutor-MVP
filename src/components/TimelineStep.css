@@ -1,25 +1,26 @@
 .timeline-step {
-  padding: 1.5rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 .step-explanation {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
   color: var(--text-main);
-  font-weight: 500;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--bg-subtle);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
 }
 
 .step-details h3, .step-checklist h3 {
-  font-size: 1rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 .details-list {
@@ -31,71 +32,64 @@
 
 .detail-item {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-sm);
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
   transition: all 0.3s ease;
-  position: relative;
-  border: 1px solid transparent;
-  margin-bottom: 0.5rem;
-}
-
-.detail-item.locked {
-  opacity: 0.4;
-  filter: blur(1px);
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .detail-item.active {
-  background-color: var(--bg-main);
+  background: rgba(59, 130, 246, 0.1);
   border-color: var(--primary);
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transform: translateX(4px);
-}
-
-.detail-item.active:hover {
-  background-color: var(--bg-subtle);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
 }
 
 .detail-item.read {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
-.detail-item.read .step-number {
-  background-color: var(--success-bg);
-  color: var(--success-text);
+.detail-item.locked {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-glass);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.active .step-number {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.read .step-number {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
 }
 
 .click-hint {
   font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--primary);
-  position: absolute;
-  bottom: -20px;
-  right: 16px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-.step-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: var(--bg-subtle);
-  color: var(--primary);
-  border-radius: 50%;
-  font-weight: 600;
-  font-size: 0.85rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+  background: rgba(59, 130, 246, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
 .checklist {
