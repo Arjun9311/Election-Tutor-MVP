@@ -24,12 +24,20 @@ const GuidedTour = () => {
   return (
     <div className="guided-tour animate-fade-in">
       <div className="tour-header glass-panel">
-        <div className="progress-indicator">
-          <span>Step {currentStep + 1} of {totalSteps}</span>
+        <div 
+          className="progress-indicator"
+          role="progressbar"
+          aria-valuenow={currentStep + 1}
+          aria-valuemin="1"
+          aria-valuemax={totalSteps}
+          aria-label="Tour Progress"
+        >
+          <span aria-hidden="true">Step {currentStep + 1} of {totalSteps}</span>
           <div className="progress-bar">
             <div 
               className="progress-fill" 
               style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
+              aria-current="step"
             ></div>
           </div>
         </div>
