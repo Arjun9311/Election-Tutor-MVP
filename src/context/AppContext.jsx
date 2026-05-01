@@ -1,4 +1,7 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
+import { auth, db } from '../config/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AppContext = createContext();
 
@@ -10,10 +13,50 @@ export const AppProvider = ({ children }) => {
   const [showQuickHelp, setShowQuickHelp] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [region, setRegion] = useState('generic'); // 'generic' or 'india'
+  
+  // Auth state
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
-  const markStepComplete = (stepIndex) => {
-    if (!completedSteps.includes(stepIndex)) {
-      setCompletedSteps([...completedSteps, stepIndex]);
+  // Listen for auth state changes
+  useEffect(() => {
+    if (!auth) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setAuthLoading(false);
+      return;
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if (currentUser && db) {
+        // Fetch user progress from Firestore
+        const userRef = doc(db, 'users', currentUser.uid);
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists()) {
+          setCompletedSteps(docSnap.data().completedSteps || []);
+        }
+      }
+      setAuthLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const markStepComplete = async (stepIndex) => {
+    const newSteps = [...completedSteps];
+    if (!newSteps.includes(stepIndex)) {
+      newSteps.push(stepIndex);
+      setCompletedSteps(newSteps);
+      
+      // Sync to Firestore if logged in
+      if (user && db) {
+        const userRef = doc(db, 'users', user.uid);
+        try {
+          await setDoc(userRef, { completedSteps: newSteps }, { merge: true });
+        } catch (error) {
+          console.error("Error saving progress:", error);
+        }
+      }
     }
   };
 
@@ -45,11 +88,14 @@ export const AppProvider = ({ children }) => {
     region,
     setRegion,
     nextStep,
-    prevStep
+    prevStep,
+    user,
+    authLoading
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAppContext = () => useContext(AppContext);

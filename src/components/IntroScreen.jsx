@@ -47,9 +47,13 @@ const IntroScreen = () => {
       </div>
 
       <div className="quick-actions-grid">
-        <button className="action-card glass-panel glow-on-hover" onClick={() => setMode('explore')}>
+        <button 
+          className="action-card glass-panel glow-on-hover" 
+          onClick={() => setMode('explore')}
+          aria-label="Explore the Election Timeline"
+        >
           <div className="icon-wrapper blue">
-            <Compass size={28} />
+            <Compass size={28} aria-hidden="true" />
           </div>
           <div className="action-info">
             <h3>Explore Timeline</h3>
@@ -57,9 +61,13 @@ const IntroScreen = () => {
           </div>
         </button>
 
-        <button className="action-card glass-panel glow-on-hover" onClick={() => setShowGlossary(true)}>
+        <button 
+          className="action-card glass-panel glow-on-hover" 
+          onClick={() => setShowGlossary(true)}
+          aria-label="Open the Voter Glossary"
+        >
           <div className="icon-wrapper purple">
-            <BookA size={28} />
+            <BookA size={28} aria-hidden="true" />
           </div>
           <div className="action-info">
             <h3>Voter Glossary</h3>
@@ -67,9 +75,13 @@ const IntroScreen = () => {
           </div>
         </button>
 
-        <button className="action-card glass-panel glow-on-hover" onClick={() => setShowQuickHelp(true)}>
+        <button 
+          className="action-card glass-panel glow-on-hover" 
+          onClick={() => setShowQuickHelp(true)}
+          aria-label="Open Quick Help"
+        >
           <div className="icon-wrapper cyan">
-            <HelpCircle size={28} />
+            <HelpCircle size={28} aria-hidden="true" />
           </div>
           <div className="action-info">
             <h3>Quick Help</h3>
@@ -84,5 +96,6 @@ const IntroScreen = () => {
     </div>
   );
 };
+
 
 export default IntroScreen;
