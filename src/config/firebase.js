@@ -2,6 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
+import { getAnalytics } from 'firebase/analytics';
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -12,12 +14,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase only if the config is present
-let app, auth, db, googleProvider;
+let app, auth, db, googleProvider, analytics;
 
 if (firebaseConfig.apiKey) {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
+  analytics = getAnalytics(app);
   googleProvider = new GoogleAuthProvider();
 }
 
@@ -41,4 +44,4 @@ export const logout = async () => {
   }
 };
 
-export { auth, db };
+export { auth, db, analytics };

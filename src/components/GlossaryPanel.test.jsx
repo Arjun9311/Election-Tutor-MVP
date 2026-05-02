@@ -46,5 +46,32 @@ describe('GlossaryPanel', () => {
     
     expect(screen.getByText(/No terms found matching/i)).toBeInTheDocument();
   });
+
+  it('calls setShowGlossary(false) when overlay is clicked or Enter is pressed', () => {
+    const setShowGlossaryMock = vi.fn();
+    AppContextModule.useAppContext.mockReturnValue({ showGlossary: true, setShowGlossary: setShowGlossaryMock });
+    render(<GlossaryPanel />);
+    
+    const overlay = screen.getByLabelText('Close glossary overlay');
+    fireEvent.click(overlay);
+    expect(setShowGlossaryMock).toHaveBeenCalledWith(false);
+
+    fireEvent.keyDown(overlay, { key: 'Enter', code: 'Enter' });
+    expect(setShowGlossaryMock).toHaveBeenCalledWith(false);
+  });
+
+  it('stops propagation when inner panel is clicked', () => {
+    const setShowGlossaryMock = vi.fn();
+    AppContextModule.useAppContext.mockReturnValue({ showGlossary: true, setShowGlossary: setShowGlossaryMock });
+    render(<GlossaryPanel />);
+    
+    const overlay = screen.getByLabelText('Close glossary overlay');
+    // The panel is the first child of the overlay
+    const panel = overlay.firstChild;
+    fireEvent.click(panel);
+    
+    // setShowGlossary should not be called because propagation is stopped
+    expect(setShowGlossaryMock).not.toHaveBeenCalled();
+  });
 });
 

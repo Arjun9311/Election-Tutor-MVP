@@ -16,7 +16,15 @@ const GlossaryPanel = () => {
   );
 
   return (
-    <div className="glossary-overlay animate-fade-in" onClick={() => setShowGlossary(false)}>
+    <div 
+      className="glossary-overlay animate-fade-in" 
+      onClick={() => setShowGlossary(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setShowGlossary(false); }}
+      aria-label="Close glossary overlay"
+    >
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div className="glossary-panel animate-slide-in" onClick={e => e.stopPropagation()}>
         <div className="glossary-header">
           <div className="header-title">

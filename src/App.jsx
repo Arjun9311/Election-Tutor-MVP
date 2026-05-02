@@ -2,13 +2,13 @@ import React, { Suspense } from 'react';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { signInWithGoogle, logout } from './config/firebase';
 import IntroScreen from './components/IntroScreen';
-import GuidedTour from './components/GuidedTour';
-import ExploreTimeline from './components/ExploreTimeline';
 import FloatingActionButton from './components/FloatingActionButton';
 import { Vote, LogIn, LogOut } from 'lucide-react';
 import './App.css';
 
 // Lazy loaded components
+const GuidedTour = React.lazy(() => import('./components/GuidedTour'));
+const ExploreTimeline = React.lazy(() => import('./components/ExploreTimeline'));
 const GlossaryPanel = React.lazy(() => import('./components/GlossaryPanel'));
 const QuickHelpPanel = React.lazy(() => import('./components/QuickHelpPanel'));
 const ChatAssistant = React.lazy(() => import('./components/ChatAssistant'));
@@ -47,10 +47,11 @@ const AppContent = () => {
       </header>
 
       <main className="main-content container">
-
-        {mode === 'intro' && <IntroScreen />}
-        {mode === 'guided' && <GuidedTour />}
-        {mode === 'explore' && <ExploreTimeline />}
+        <Suspense fallback={<div className="loading-state">Loading...</div>}>
+          {mode === 'intro' && <IntroScreen />}
+          {mode === 'guided' && <GuidedTour />}
+          {mode === 'explore' && <ExploreTimeline />}
+        </Suspense>
       </main>
 
       <Suspense fallback={null}>

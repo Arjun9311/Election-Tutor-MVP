@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import { useState } from 'react';
 import { CheckCircle2, Circle } from 'lucide-react';
 import './TimelineStep.css';
@@ -38,6 +39,9 @@ const TimelineStep = ({ data }) => {
                 key={index}
                 className={`detail-item ${isRead ? 'read' : ''} ${isActive ? 'active' : ''} ${isLocked ? 'locked' : ''}`}
                 onClick={() => handleStepClick(index)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleStepClick(index); }}
               >
                 <span className="step-number">
                   {isRead ? <CheckCircle2 size={16} /> : index + 1}
@@ -61,6 +65,10 @@ const TimelineStep = ({ data }) => {
                 className={`checklist-item ${isChecked ? 'checked' : ''}`}
                 onClick={() => toggleCheck(index)}
                 style={{ cursor: 'pointer', opacity: isChecked ? 0.7 : 1 }}
+                role="checkbox"
+                aria-checked={isChecked}
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCheck(index); } }}
               >
                 {isChecked ? (
                   <CheckCircle2 size={18} className="icon-check" />
