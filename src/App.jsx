@@ -19,9 +19,9 @@ const AppContent = () => {
   return (
     <div className="app-container">
       <header className="app-header glass-panel">
-        <div 
-          className="logo" 
-          onClick={() => setMode('intro')} 
+        <div
+          className="logo"
+          onClick={() => setMode('intro')}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setMode('intro'); }}
